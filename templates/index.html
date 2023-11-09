@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notepad</title>
+    <style>
+        div.notes{
+            background-color: rgb(109, 170, 19);
+            padding: 10px;
+        }
+        a{
+            text-decoration: none;
+            padding: 5px;
+            background-color: aquamarine;
+            border: 0.5px solid black;
+            margin: 3px;
+        }
+        body{
+            background-color: #444;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <form action="/submitNote" method="post">
+        <h1>notepad</h1>
+        <p>enter your text here</p>
+        <input type="text" name="noteText">
+        <input type="submit" value="submit">
+        <div class="notes">
+            {% for note in notes %}
+            <a href="/remove/{{note}}">{{note}}</a>
+            {% endfor %}
+        </div>
+    </form>
+</body>
+</html>

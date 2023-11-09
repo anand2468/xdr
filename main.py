@@ -1,19 +1,23 @@
-from flask import Flask, render_template,url_for
+from flask import Flask, render_template, request, redirect
 
-app = Flask(xdr)
+app = Flask(__name__)
+
+notes = ['hi','hell']
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('index.html', notes= notes)
 
-@app.route('/chatrm')
-def chatrm():
-    return render_template('chtrm.html')
+@app.route('/submitNote', methods= ['POST', 'GET'])
+def submitNote():
+    print(request.form, request.form['noteText'])
+    notes.append(request.form['noteText'])
+    return redirect('/')
 
-@app.route('/chatrarea')
-def chatarea():
-    return render_template('chatarea.html')
+@app.route('/remove/<note>')
+def removeNote(note):
+    notes.remove(note)
+    return redirect('/')
 
-
-if __name__=='__main__':
-    app.run(debug=True, host='0.0.0.0', port=80)
+if __name__ == '__main__':
+    app.run(debug=True)
